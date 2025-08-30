@@ -40,6 +40,20 @@ st.write("Upload a plant image to get disease prediction")
 
 uploaded_file = st.file_uploader("Choose an image", type=['jpg', 'jpeg', 'png'])
 
+# tips if the plants are diseased 
+TIPS = {
+    "powdery": """💡 **Tips for Powdery Mildew:**
+- Remove and destroy infected leaves.
+- Ensure proper air circulation around plants.
+- Avoid overhead watering.
+- Use fungicide if infection is severe.""",
+    "rust": """💡 **Tips for Rust Disease:**
+- Prune away affected parts.
+- Keep leaves dry by watering at the base.
+- Avoid overcrowding plants.
+- Apply appropriate fungicide if needed."""
+}
+
 if uploaded_file:
     # Display image
     image = Image.open(uploaded_file)
@@ -63,5 +77,7 @@ if uploaded_file:
             st.success(f"The plant is healthy! 🌿 (Confidence: {confidence:.2f}%)")
         elif predicted_class == "powdery":
             st.error(f"The plant has Powdery Mildew! 🌾 (Confidence: {confidence:.2f}%)")
+            st.info(TIPS["powdery"])
         else:
             st.error(f"The plant has Rust! 🍂 (Confidence: {confidence:.2f}%)")
+            st.info(TIPS["rust"])
