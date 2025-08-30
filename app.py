@@ -59,4 +59,9 @@ if uploaded_file:
         confidence = np.max(prediction) * 100
         
         # Display result
-        st.success(f"Prediction: **{predicted_class}** ({confidence:.2f}% confidence)")
+        if predicted_class == "healthy":
+            st.success(f"The plant is healthy! 🌿 (Confidence: {confidence:.2f}%)")
+        elif predicted_class == "powdery":
+            st.error(f"The plant has Powdery Mildew! 🌾 (Confidence: {confidence:.2f}%)")
+        else:
+            st.error(f"The plant has Rust! 🍂 (Confidence: {confidence:.2f}%)")
